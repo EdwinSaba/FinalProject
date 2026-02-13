@@ -1,0 +1,25 @@
+{
+  "name": "freelance-hub-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.0.0",
+    "@prisma/config": "^7.4.0",
+    "@prisma/internals": "^7.4.0",
+    "axios": "^1.7.9",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^16.4.7",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "prisma": "^6.0.0"
+  }
+}

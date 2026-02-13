@@ -1,0 +1,41 @@
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://neondb_owner:npg_Akrna5HJ2UiR@ep-bold-feather-aixxr4kj-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  role      String   // "client" or "freelancer"
+  name      String?
+  jobs      Job[]    
+  proposals Proposal[]
+}
+
+model Job {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  budget      Float
+  status      String   @default("OPEN")
+  createdAt   DateTime @default(now())
+  createdBy   Int      
+  author      User     @relation(fields: [createdBy], references: [id])
+  proposals   Proposal[]
+}
+
+model Proposal {
+  id           Int      @id @default(autoincrement())
+  message      String
+  bidAmount    Float
+  status       String   @default("PENDING") // For Accept/Deny
+  jobId        Int
+  freelancerId Int
+  job          Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  freelancer   User     @relation(fields: [freelancerId], references: [id])
+}
